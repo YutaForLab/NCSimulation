@@ -1,2 +1,2 @@
 # NCSimulation
-to report my works
+this repository is to report my works.
