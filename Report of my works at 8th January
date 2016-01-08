@@ -1,0 +1,8 @@
+My works of simulation of combination neck-cooler with air-conditioner.
+
+After 1st skype meeting on December 21st, I tried to use "Frodo" which
+is GUI application and can simulate DCOP solving.
+Before using it, I had to install "Graphviz" which need to describe
+graphs with Frodo.
+I found it and install, so I succeeded in carry out Frodo application.
+At first, I solved sample problem. Next I will study making problem files.
