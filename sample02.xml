@@ -1,0 +1,94 @@
+<instance>  
+  <presentation name="sampleProblem" maxConstraintArity="2"  
+                maximize="false" format="XCSP 2.1_FRODO" />  
+ 
+  <agents nbAgents="2">  
+    <agent name="AC" />
+    <agent name="NC" />  
+    <!-- <agent name="NC2" />  
+    <agent name="NC3" /> -->
+      
+  </agents>  
+ 
+  <domains nbDomains="2">  
+    <domain name="NCtemp_range" nbValues="23">18..40</domain>  
+    <domain name="ACtemp_range" nbValues="15">16..30</domain>
+  </domains>  
+ 
+  <variables nbVariables="4">  
+  	<variable name="AC" domain="ACtemp_range" agent="AC" />  
+    <variable name="1" domain="NCtemp_range" agent="NC" />  
+    <variable name="2" domain="NCtemp_range" agent="NC" />  
+    <variable name="3" domain="NCtemp_range" agent="NC" />
+    <!--<variable name="4" domain="NCtemp_range" agent="NC" />-->
+  </variables>  
+  
+  <predicates nbPredicates="1">  
+    <predicate name="NEQ">  
+      <parameters> int X1 int X2 </parameters>  
+      <expression>  
+        <functional> ne(X1, X2) </functional>  
+      </expression>  
+    </predicate>  
+  </predicates>  
+  
+  <functions nbFunctions="1"> 
+    <function name="set_temperature" return="int">
+    	<parameters>int temperature</parameters>
+    	<expression>
+    		<functional>mul(1000, max(0, slack))</functional>
+    	</expression>
+    </function>
+    
+    <function name="utility_consumption" return="int">
+    	<parameters>int targetTemperature</parameters>
+    	<expression>
+    		<functional>sub (targetTemperature, 18)</functional>
+    	</expression>
+    </function>
+    
+    <function name="utility_preference" return="int">
+    	<parameters>int targetTemperature</parameters>
+    	<expression>
+    		<functional>sub (40, targetTemperature)</functional>
+    	</expression>
+    </function>
+    
+
+  </functions> 
+ 
+  <constraints nbConstraints="4">
+  	<constraint name="AC_and_1_have_different_colors" arity="2" scope="AC 1" reference="NEQ" >  
+      <parameters> AC 1 </parameters>  
+    </constraint>  
+    <constraint name="1_and_2_have_different_colors" arity="2" scope="1 2" reference="NEQ" >  
+      <parameters> 1 2 </parameters>  
+    </constraint>  
+    <constraint name="1_and_3_have_different_colors" arity="2" scope="1 3" reference="NEQ" >  
+      <parameters> 1 3 </parameters>  
+    </constraint>  
+    <constraint name="2_and_3_have_different_colors" arity="2" scope="2 3" reference="NEQ" >  
+      <parameters> 2 3 </parameters>  
+    </constraint>  
+    
+  </constraints> 
+ <!--
+  <relations nbRelations="1">  
+    <relation name="NEQ" arity="2" nbTuples="4" semantics="soft" defaultCost="0">  
+      infinity: 1 1|2 2|3 3|4 4
+    </relation>  
+  </relations>  
+ 
+  <constraints nbConstraints="4">  
+    <constraint name="1_and_2_have_link" arity="2" scope="1 2" reference="NEQ" />  
+    <constraint name="1_and_3_have_link" arity="2" scope="1 3" reference="NEQ" />
+    <constraint name="2_and_3_have_link" arity="2" scope="2 3" reference="NEQ" />
+    <constraint name="1_and_AC_have_link" arity="2" scope="1 AC" reference="NEQ" />
+    
+    <constraint name="1_and_4_have_link" arity="2" scope="1 4" reference="NEQ" />  
+    <constraint name="2_and_4_have_link" arity="2" scope="2 4" reference="NEQ" />
+    <constraint name="3_and_4_have_link" arity="2" scope="3 4" reference="NEQ" />
+     
+  </constraints>
+   -->
+</instance>
