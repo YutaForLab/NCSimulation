@@ -1,0 +1,36 @@
+<instance>  
+  <presentation name="sampleProblem" maxConstraintArity="2"  
+                maximize="false" format="XCSP 2.1_FRODO" />  
+ 
+  <agents nbAgents="4">  
+    <agent name="NC1" />  
+    <agent name="NC2" />  
+    <agent name="NC3" />
+    <agent name="AC" />  
+  </agents>  
+ 
+  <domains nbDomains="2">  
+    <domain name="NCtemp_range" nbValues="23">18..40</domain>  
+    <domain name="ACtemp_range" nbValues="15">16..30</domain>
+  </domains>  
+ 
+  <variables nbVariables="3">  
+    <variable name="1" domain="NCtemp_range" agent="NC1" />  
+    <variable name="2" domain="NCtemp_range" agent="NC2" />  
+    <variable name="3" domain="NCtemp_range" agent="NC3" />  
+    <variable name="AC" domain="ACtemp_range" agent="AC" />  
+  </variables>  
+ 
+  <relations nbRelations="1">  
+    <relation name="NEQ" arity="2" nbTuples="4" semantics="soft" defaultCost="0">  
+      infinity: 1 1|2 2|3 3|4 4  
+    </relation>  
+  </relations>  
+ 
+  <constraints nbConstraints="3">  
+    <constraint name="1_and_2_have_link" arity="2" scope="1 2" reference="NEQ" />  
+    <constraint name="1_and_3_have_link" arity="2" scope="1 3" reference="NEQ" />
+    <constraint name="1_and_AC_have_link" arity="2" scope="1 AC" reference="NEQ" />  
+    <constraint name="2_and_3_have_link" arity="2" scope="2 3" reference="NEQ" />  
+  </constraints>  
+</instance>
